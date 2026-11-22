@@ -22,6 +22,20 @@ PAYLOAD_PATH = Path(__file__).parents[2] / "data" / "payload.txt"
 PRIVATE_KEY_PATH = Path(__file__).parents[2] / "private_key.pem"
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    try:
+        app.state.private_key = load_private_key()
+    except FileNotFoundError as error:
+        raise RuntimeError(
+            "RSA private key is missing. Run `python bin/generate_keys.py`."
+        ) from error
+    app.state.sessions = {}
+    yield
+
+
+
+
 app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
@@ -30,6 +44,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def invalid_request_handler(request: Request, error: RequestValidationError) -> JSONResponse:
+    return JSONResponse(status_code=400, content={"detail": "Invalid request."})
 
 
 class HandshakeRequest(BaseModel):
@@ -113,23 +132,6 @@ async def login(request: LoginRequest, http_request: Request) -> dict[str, str]:
         "iv": base64.b64encode(response_iv).decode("ascii"),
         "ciphertext": base64.b64encode(response_ciphertext).decode("ascii"),
     }
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    try:
-        app.state.private_key = load_private_key()
-    except FileNotFoundError as error:
-        raise RuntimeError(
-            "RSA private key is missing. Run `python bin/generate_keys.py`."
-        ) from error
-    app.state.sessions = {}
-    yield
-
-
-@app.exception_handler(RequestValidationError)
-async def invalid_request_handler(request: Request, error: RequestValidationError) -> JSONResponse:
-    return JSONResponse(status_code=400, content={"detail": "Invalid request."})
 
 
 def decode_base64(value: str) -> bytes:
