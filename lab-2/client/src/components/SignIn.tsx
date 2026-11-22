@@ -1,19 +1,26 @@
 import { Alert, Box, Button, Paper, Stack, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useState, type FormEvent } from "react";
-import { encodeBase64 } from "@/crypto";
+import { decodeBase64, encodeBase64 } from "@/lib/crypto";
 import { useHandshake } from "@/context/HandshakeContext";
 
 type Props = {
   onSuccess: (content: string) => void;
 };
 
-function isLoginResponse(value: unknown): value is { message: string } {
+type LoginResponse = {
+  iv: string;
+  ciphertext: string;
+};
+
+function isLoginResponse(value: unknown): value is LoginResponse {
   return (
     typeof value === "object" &&
     value !== null &&
-    "message" in value &&
-    typeof value.message === "string"
+    "iv" in value &&
+    typeof value.iv === "string" &&
+    "ciphertext" in value &&
+    typeof value.ciphertext === "string"
   );
 }
 
@@ -64,7 +71,22 @@ export default function SignIn({ onSuccess }: Props) {
       if (!isLoginResponse(data)) {
         throw new Error("The API returned an invalid login response.");
       }
-      onSuccess(data.message);
+
+      const responseIv = decodeBase64(data.iv);
+      const responseCiphertext = decodeBase64(data.ciphertext);
+      if (responseIv.length !== 12) {
+        throw new Error("The API returned an invalid response IV.");
+      }
+
+      const plaintext = await crypto.subtle.decrypt(
+        {
+          name: "AES-GCM",
+          iv: responseIv,
+        },
+        aesKey,
+        responseCiphertext,
+      );
+      onSuccess(new TextDecoder().decode(plaintext));
     } catch (submitError) {
       setError(
         submitError instanceof Error
@@ -81,7 +103,7 @@ export default function SignIn({ onSuccess }: Props) {
       <Stack component="form" spacing={2} onSubmit={handleSubmit}>
         <Box>
           <Typography variant="h4" sx={{ fontWeight: 800 }}>
-            Get protected data :3
+            Get data securely :3
           </Typography>
         </Box>
 

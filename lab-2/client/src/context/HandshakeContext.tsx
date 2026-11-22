@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { establishSessionKey } from "@/crypto";
+import { establishSessionKey } from "@/lib/crypto";
 
 type HandshakeContextValue = {
   aesKey: CryptoKey | null;
@@ -7,12 +7,16 @@ type HandshakeContextValue = {
   isLoading: boolean;
 };
 
+/// A React context that provides the AES session key, any handshake error, and 
+/// the loading state.
 const HandshakeContext = createContext<HandshakeContextValue | undefined>(undefined);
 
 type Props = {
   children: ReactNode;
 };
 
+/// A React context provider that establishes a secure session key with the server 
+/// and provides it to its children.
 export function HandshakeProvider({ children }: Props) {
   const [aesKey, setAesKey] = useState<CryptoKey | null>(null);
   const [error, setError] = useState<string | null>(null);
