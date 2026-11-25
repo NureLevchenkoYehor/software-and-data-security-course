@@ -1,0 +1,19 @@
+university = "ХНУРЕ"
+faculty = "комп'ютерних наук"
+subject = "Безпека програм та даних"
+type = "ЛБ"
+number = 3
+title = "Програмна реалізація хеш-функцій"
+
+[[authors]]
+name = "Левченко Є. Д."
+edu-program = "ПЗПІ"
+course = 4
+semester = 7
+group = "23-1"
+gender = "m"
+
+[[mentors]]
+name = "Бабій А. С."
+degree = "Доцент кафедри ПІ"
+gender = "m"

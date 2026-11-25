@@ -1,0 +1,78 @@
+nure_method:
+  type: Book
+  title: Методичні вказівки до лабораторних робіт з навчальної дисципліни «Безпека програм та даних»
+  author: Бабій А. С.
+  publisher: ХНУРЕ
+  date: 2024
+  page-total: 52
+
+stallings_crypto:
+  type: Book
+  title: Cryptography and Network Security. Principles and Practice
+  author: Stallings W.
+  publisher: Pearson
+  date: 2020
+  page-total: 848
+
+preneel_1993:
+  type: Article
+  title: "Hash Functions Based on Block Ciphers: A Synthetic Approach"
+  author: ["Preneel B.", "Govaerts R.", "Vandewalle J."]
+  date: 1993
+  page-range: 368-378
+  parent:
+    type: Proceedings
+    title: "Advances in Cryptology — CRYPTO '93. Lecture Notes in Computer Science, vol. 773"
+    publisher: Springer
+
+webster_tavares:
+  type: Article
+  title: On the Design of S-Boxes
+  author: ["Webster A. F.", "Tavares S. E."]
+  date: 1986
+  page-range: 523-534
+  parent:
+    type: Proceedings
+    title: "Advances in Cryptology — CRYPTO '85. Lecture Notes in Computer Science, vol. 218"
+    publisher: Springer
+
+fastapi_docs:
+  type: Web
+  title: FastAPI Documentation
+  author: Ramírez S.
+  url:
+    value: https://fastapi.tiangolo.com/
+    date: 2026-11-25
+
+fips_46_3:
+  type: Web
+  title: "FIPS PUB 46-3. Data Encryption Standard (DES)"
+  author: National Institute of Standards and Technology
+  url:
+    value: https://csrc.nist.gov/pubs/fips/46-3/final
+    date: 2026-11-25
+
+menezes_hac:
+  type: Book
+  title: Handbook of Applied Cryptography
+  author: ["Menezes A. J.", "van Oorschot P. C.", "Vanstone S. A."]
+  publisher: CRC Press
+  date: 1996
+  page-total: 780
+
+png_spec:
+  type: Web
+  title: Portable Network Graphics (PNG) Specification (Third Edition). W3C Recommendation
+  author: World Wide Web Consortium
+  url:
+    value: https://www.w3.org/TR/png-3/
+    date: 2026-11-25
+
+zip_appnote:
+  type: Web
+  title: "APPNOTE.TXT — .ZIP File Format Specification"
+  author: PKWARE Inc.
+  url:
+    value: https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
+    date: 2026-11-25
+

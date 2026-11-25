@@ -1,0 +1,9 @@
+[project]
+name = "lab3-server"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.143.3,<0.144.0",
+    "cryptography>=50.0.2",
+    "python-docx>=1.2.0",
+]
