@@ -1,0 +1,7 @@
+[project]
+name = "lab4-server"
+version = "0.1.0"
+dependencies = [
+    "fastapi[standard]>=0.143.3,<0.144.0",
+    "cryptography>=50.0.2"
+]

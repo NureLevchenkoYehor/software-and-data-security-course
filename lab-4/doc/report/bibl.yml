@@ -1,0 +1,39 @@
+nure_method:
+  type: Book
+  title: Методичні вказівки до лабораторних робіт з навчальної дисципліни «Безпека програм та даних»
+  author: Бабій А. С.
+  publisher: ХНУРЕ
+  date: 2024
+  page-total: 52
+
+stallings_crypto:
+  type: Book
+  title: Cryptography and Network Security. Principles and Practice
+  author: Stallings W.
+  publisher: Pearson
+  date: 2020
+  page-total: 848
+
+fastapi_docs:
+  type: Web
+  title: FastAPI Documentation
+  author: Ramírez S.
+  url:
+    value: https://fastapi.tiangolo.com/
+    date: 2026-11-25
+
+rfc6455:
+  type: Web
+  title: "RFC 6455: The WebSocket Protocol"
+  author: ["Fette I.", "Melnikov A."]
+  url:
+    value: https://datatracker.ietf.org/doc/html/rfc6455
+    date: 2026-11-25
+
+web_crypto:
+  type: Web
+  title: Web Cryptography API. W3C Recommendation
+  author: World Wide Web Consortium
+  url:
+    value: https://www.w3.org/TR/WebCryptoAPI/
+    date: 2026-11-25
